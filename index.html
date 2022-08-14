@@ -1,40 +1,495 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>Canvas Presentation</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <p><img id="rs" src="https://rollingscopes.com/images/logo_rs2.svg" alt="RSSchool" width="0" height="0"></p>
+            <canvas id="start" width="900" height="500">
+                Your browser does not support the HTML5 canvas tag.
+            </canvas>
+            <script>
+                const start = document.getElementById("start");
+                const ctx0 = start.getContext("2d");
+                function draw0(img, x, y, w, h) {
+                    ctx0.drawImage(img, 20, 20);
+                    let dx0 = 2;
+                    let dy0 = 2;
+                    function anim() {
+                        ctx0.clearRect(0, 0, start.width, start.height);
+                        ctx0.drawImage(img, x, y, w, h);
+                        ctx0.font = "80px Arial";
+                        ctx0.fillStyle = "white";
+                        ctx0.fillText("CANVAS ", 300, 170);
+                        x += dx0;
+                        y += dy0;
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+                        if (x + w > start.width || x < 0) {
+                            dx0 = -dx0;
+                        }
+                        if (y + h > start.height || y < 0) {
+                            dy0 = -dy0;
+                        }
+                        requestAnimationFrame(anim);
+                    }
+                    requestAnimationFrame(anim);
+                }
+                const img0 = document.getElementById("rs");
+                draw0(img0, 0, 0, 150, 125);
+            </script>
+        </section>
+        <section>
+            <section>
+                <h2>About</h2>
+                <p>
+                    The Canvas API provides a means for drawing graphics via JavaScript and the HTML
+                    <<b>canvas</b>> element. Among other things, it can be used for animation, game graphics, data visualization,
+                    photo manipulation, and real-time video processing.
+                </p>
+            </section>
+            <section>
+                <p>What we can draw on the canvas</p>
+                <ul>
+                    <li><b>Line</b></li>
+                    <li><b>Rectangle</b></li>
+                    <li><b>Circle</b></li>
+                    <li><b>Text</b></li>
+                    <li><b>Image</b></li>
+                    <li>and many more</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>How to create a canvas</h2>
+                <pre>
+                    <code class="language-html">
+<canvas id="myCanvas1" width="800" height="400"></canvas>
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>How to draw on the canvas</h2>
+                <pre>
+                    <code>
+<script>
+    const canvas1 = document.getElementById("myCanvas1");
+    const ctx1 = canvas1.getContext("2d");
+</script>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+                    </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Canvas PATH</h2>
+                <p>
+                    To draw straight lines on a canvas, we will use the following two methods:
+                </p>
+                <ol>
+                    <li>moveTo(x,y) defines the starting point of the line</li>
+                    <li>lineTo(x,y) defines the ending point of the line</li>
+                </ol>
+            </section>
+            <section>
+                <h2>Canvas PATH Example</h2>
+                <pre>
+                    <code>
+<canvas id="myCanvas2" width="800" height="400" style="border: 2px solid yellow;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    const canvas2 = document.getElementById("myCanvas2");
+    const ctx2 = canvas2.getContext("2d");
+    ctx2.moveTo(0, 200);
+    ctx2.lineTo(200, 0);
+    ctx2.strokeStyle = "black";
+    ctx2.lineWidth = 5;
+    ctx2.moveTo(0,0);
+    ctx2.bezierCurveTo(150, 300, 150, 300, 300, 0);
+    ctx2.stroke();
+</script>
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <canvas id="myCanvas2a" width="800" height="400" style="border: 2px solid white;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+                    const canvas2a = document.getElementById("myCanvas2a");
+                    const ctx2a = canvas2a.getContext("2d");
+                    ctx2a.moveTo(0, 200);
+                    ctx2a.lineTo(200, 0);
+                    ctx2a.strokeStyle = "white";
+                    ctx2a.lineWidth = 5;
+                    ctx2a.moveTo(0,0);
+                    ctx2a.bezierCurveTo(150, 300, 150, 300, 300, 0);
+                    ctx2a.stroke();
+                </script>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>CANVAS Circle element</h2>
+                <p>To draw a circle on a canvas, we will use the following method:</p>
+                <ul>
+                    <li>arc(x,y,r,start,stop)</li>
+                    <li>To actually draw the circle, we must use one of the stroke() or fill() methods.</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Canvas Circle Example</h2>
+                <pre>
+                    <code>
+<canvas id="myCanvas3" width="800" height="400" style="border: 2px solid yellow;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    const canvas3 = document.getElementById("myCanvas3");
+    const ctx3 = canvas3.getContext("2d");
+    ctx3.arc(200, 200, 200, 0, 2 * Math.PI)
+    ctx3.stroke();
+    // ctx.fillStyle = "black";
+    // ctx.fill();
+</script>
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <canvas id="myCanvas3a" width="800" height="300" style="border: 2px solid white;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+                    const canvas3a = document.getElementById("myCanvas3a");
+                    const ctx3a = canvas3a.getContext("2d");
+                    ctx3a.arc(400, 150, 150, 0, 2 * Math.PI);
+                    ctx3a.strokeStyle = "white";
+                    ctx3a.lineWidth = 5;
+                    ctx3a.stroke();
+                </script>
+                <canvas id="myCanvas3b" width="800" height="300" style="border: 2px solid orange;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+                    const canvas3b = document.getElementById("myCanvas3b");
+                    const ctx3b = canvas3b.getContext("2d");
+                    ctx3b.arc(400, 150, 150, 0, 2 * Math.PI)
+                    ctx3b.fillStyle = "orange";
+                    ctx3b.fill();
+                </script>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Canvas text element</h2>
+                <p>
+                    To draw text on a canvas, we will use the following method:
+                </p>
+                <ul>
+                    <li>fillText(text,x,y) - Draws "filled" text</li>
+                    <li>strokeText(text,x,y) - Draws "stroked" text</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Canvas text Example</h2>
+                <pre>
+                <code>
+<canvas id="myCanvas4" width="800" height="400" style="border: 2px solid yellow;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    const canvas4 = document.getElementById("myCanvas4");
+    const ctx4 = canvas4.getContext("2d");
+    ctx4.font = "40px Arial";
+    ctx4.fillText("RS School filled", 250, 170);
+    ctx4.strokeText("RS School stroked",250, 270);
+</script>
+                </code>
+            </pre>
+            </section>
+            <section>
+                <canvas id="myCanvas4a" width="800" height="400" style="border: 2px solid white;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+                    const canvas4a = document.getElementById("myCanvas4a");
+                    const ctx4a = canvas4a.getContext("2d");
+                    ctx4a.font = "60px Arial";
+                    ctx4a.strokeStyle = "white";
+                    ctx4a.fillStyle = "white";
+                    ctx4a.fillText("RS School filled", 150, 170);
+                    ctx4a.strokeText("RS School stroked",150, 270);
+                </script>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Canvas Gradients</h2>
+                <p>Gradients can be used to fill rectangles, circles, lines and text.
+                    Shapes on the canvas are not limited to solid colors.
+                </p>
+                <p>
+                    There are two types of gradients: linear and radial.
+                </p>
+                <ul>
+                    <li>
+                        createLinearGradient(x0,y0,x1,y1) - Creates a linear gradient
+                    </li>
+                    <li>
+                        createRadialGradient(x0,y0,r0,x1,y1,r1) - Creates a radial gradient
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>Canvas Gradients Example</h3>
+                <ul>
+                    <li>Using createRadialGradient()</li>
+                    <li>Using createLinearGradient()</li>
+                </ul>
+
+                <pre>
+                <code>
+<canvas id="myCanvas5" width="800" height="400" style="border: 2px solid yellow;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    const canvas5 = document.getElementById("myCanvas5");
+    const ctx5 = canvas5.getContext("2d");
+    const gradient5 = ctx5.createRadialGradient(400, 200, 0, 400, 200, 400); // Create Radial gradient
+    // const gradient5 = ctx.createLinearGradient(0, 0, 800, 0);       // Create Linear gradient
+    gradient5.addColorStop(0, "red");
+    gradient5.addColorStop(0.4, "lime");
+    gradient5.addColorStop(0.6, "yellow");
+    gradient5.addColorStop(1, "blue");
+    ctx5.fillStyle = gradient5;                                         // Fill with gradient
+    ctx5.fillRect(10, 10, 780, 380);
+</script>
+                </code>
+            </pre>
+            </section>
+            <section>
+<!--                <img height="300px" src="./assets/5.png" alt="result"/>-->
+<!--                <img height="300px" src="./assets/6.png" alt="result"/>-->
+                <canvas id="myCanvas5a" width="800" height="300" style="border: 2px solid white;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+                    const canvas5a = document.getElementById("myCanvas5a");
+                    const ctx5a = canvas5a.getContext("2d");
+                    const gradient5a = ctx5a.createRadialGradient(400, 150, 0, 400, 150, 300); // Create Radial gradient
+                    // const gradient = ctx5a.createLinearGradient(0, 0, 800, 0);       // Create Linear gradient
+                    gradient5a.addColorStop(0, "red");
+                    gradient5a.addColorStop(0.4, "lime");
+                    gradient5a.addColorStop(0.6, "yellow");
+                    gradient5a.addColorStop(1, "blue");
+                    ctx5a.fillStyle = gradient5a;                                         // Fill with gradient
+                    ctx5a.fillRect(10, 10, 780, 280);
+                </script>
+                <canvas id="myCanvas5b" width="800" height="300" style="border: 2px solid yellow;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+                    const canvas5b = document.getElementById("myCanvas5b");
+                    const ctx5b = canvas5b.getContext("2d");
+                    // const gradient = ctx5b.createRadialGradient(400, 200, 0, 400, 200, 300); // Create Radial gradient
+                    const gradient5b = ctx5b.createLinearGradient(0, 0, 800, 0);       // Create Linear gradient
+                    gradient5b.addColorStop(0, "red");
+                    gradient5b.addColorStop(0.4, "lime");
+                    gradient5b.addColorStop(0.6, "yellow");
+                    gradient5b.addColorStop(1, "blue");
+                    ctx5b.fillStyle = gradient5b;                                         // Fill with gradient
+                    ctx5b.fillRect(10, 10, 780, 280);
+                </script>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Canvas Images</h2>
+                <p>
+                    To draw an image on a canvas, we will use the following method:
+                </p>
+                <ul>
+                    <li>drawImage(image,x,y) - Draws an image</li>
+                </ul>
+            </section>
+            <section>
+                <h2>
+                    Canvas Images Example
+                </h2>
+                <pre>
+                <code>
+<p>
+    <img id="rsLogo" src="https://app.rs.school/static/images/logo-rsschool3.png" alt="RSSchool" width="200" height="75">
+</p>
+<p>Canvas:</p>
+<canvas id="myCanvas6" width="800" height="400" style="border: 2px solid #ddabcd;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    const canvas6 = document.getElementById("myCanvas6");
+    const ctx6 = canvas6.getContext("2d");
+    const img6 = document.getElementById("rsLogo");
+    ctx6.drawImage(img6, 10, 100);
+</script>
+                </code>
+            </pre>
+            </section>
+            <section>
+                <p>
+                    <img id="logo" src="https://rs.school/images/rs_school-og.png" alt="RSSchool" width="150" height="75">
+                </p>
+                <p>Canvas: </p>
+                <canvas id="lg" width="800" height="400" style="border: 2px solid white;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+                    const canvas6a = document.getElementById("lg");
+                    const ctx6a = canvas6a.getContext("2d");
+                    const img6a = document.getElementById("logo");
+                    // const img6a = document.getElementById("rs");
+                    ctx6a.drawImage(img6a, 10, 150, 200, 100);
+                </script>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>
+                    Canvas Animation
+                </h2>
+                <p>To animate a canvas, we will use the following method:</p>
+                <ul>
+                    <li>requestAnimationFrame(callback) - Calls a function every time the browser is ready to repaint the
+                        page
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Canvas Animation Example</h2>
+                <pre>
+                <code>
+<p>
+    <img id="rsSchoolLogo" src="https://app.rs.school/static/images/logo-rsschool3.png" alt="RSSchool" width="200" height="75">
+</p>
+<p>Canvas Animation: </p>
+<canvas id="myCanvas7" width="800" height="400" style="border: 2px solid #ddabcd;">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    const canvas7 = document.getElementById("myCanvas7");
+    const ctx7 = canvas7.getContext("2d");
+    const img = document.getElementById("rsSchoolLogo");
+    ctx7.drawImage(img, 10, 10);
+    let x = 0;
+    let y = 0;
+    let w = 200;
+    let h = 100;
+    let dx = 2;
+    let dy = 2;
+
+    function animate() {
+        ctx7.clearRect(0, 0, canvas7.width, canvas7.height);
+        ctx7.drawImage(img, x, y, w, h);
+        x += dx;
+        y += dy;
+
+        if (x + w > canvas7.width || x < 0) {
+            dx = -dx;
+        }
+        if (y + h > canvas7.height || y < 0) {
+            dy = -dy;
+        }
+        requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+</script>
+                </code>
+            </pre>
+            </section>
+            <section>
+                <p>
+                    <img id="rsSchoolLogo7a" src="https://rs.school/images/rs_school-og.png" alt="RSSchool" width="150" height="75">
+                </p>
+                <p>Canvas Animation: </p>
+                <canvas id="myCanvas7a" width="800" height="400" style="border: 2px solid white;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+                <script>
+
+                    const canvas7a = document.getElementById("myCanvas7a");
+                    const ctx7a = canvas7a.getContext("2d");
+                    const img7a = document.getElementById("rsSchoolLogo7a");
+                    ctx7a.drawImage(img7a, 10, 10);
+                    let x7a = 0;
+                    let y7a = 0;
+                    let w7a = 150;
+                    let h7a = 75;
+                    let dx7a = 2;
+                    let dy7a = 2;
+
+                    function animate7a() {
+                        ctx7a.clearRect(0, 0, canvas7a.width, canvas7a.height);
+                        ctx7a.drawImage(img7a, x, y, w, h);
+                        x7a += dx7a;
+                        y7a += dy7a;
+
+                        if (x7a + w7a > canvas7a.width || x7a < 0) {
+                            dx7a = -dx7a;
+                        }
+                        if (y7a + h7a > canvas7a.height || y7a < 0) {
+                            dy7a = -dy7a;
+                        }
+                        requestAnimationFrame(animate7a);
+                    }
+                    requestAnimationFrame(animate7a);
+                </script>
+            </section>
+        </section>
+
+        <section>
+            <h2>
+                That's all!
+            </h2>
+            <p>
+                Thanks for watching!
+            </p>
+        </section>
+    </div>
+</div>
+
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
 </html>
